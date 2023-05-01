@@ -6,10 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.droidpwani.todoapp.ui.theme.TodoAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,25 +16,34 @@ class MainActivity : ComponentActivity() {
       TodoAppTheme {
         // A surface container using the 'background' color from the theme
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-          Greeting("Android")
+
         }
       }
     }
   }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-  Text(
-    text = "Hello $name!",
-    modifier = modifier
-  )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-  TodoAppTheme {
-    Greeting("Android")
-  }
-}
+/**
+ * Task: Creating a business card
+ * TODO 1: Create a BusinessCard Composable to show Your name
+ */
+
+/**
+ * Task: Creating a business card
+ * TODO 2: Add your email address to the BusinessCard composable
+ *  The email address will be in a row. The row will have an icon. Use `ic_email` drawable and
+ *  text showing your email address
+ */
+
+/**
+ * Task: Creating a business card
+ * TODO 3: Add an user image at the top of the BusinessCard Composable
+ *   The Image should be centered in the UI,
+ *   The image has a height of 200.dp
+ *   The image is of a circle shape
+ *
+ */
+
+
+
