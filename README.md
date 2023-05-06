@@ -4,4 +4,4 @@ A Todo app: A sample app to use at Pwani workshops, May Edition: Building Androi
 
 Find Me 👇🏼
 
-[Twitter](https://twitter.com/B__Kinya) || [LinkedIn](www.linkedin.com/in/beatrice-kinya-93) || [Hashnode](https://kinya.hashnode.dev)
+[Twitter](https://twitter.com/B__Kinya) || [LinkedIn](https://www.linkedin.com/in/beatrice-kinya-93307514b/) || [Hashnode](https://kinya.hashnode.dev)
