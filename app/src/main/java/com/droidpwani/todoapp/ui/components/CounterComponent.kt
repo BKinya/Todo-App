@@ -1,8 +1,9 @@
-package com.droidpwani.todoapp.ui.screens
+package com.droidpwani.todoapp.ui.components
 
 import android.util.Log
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,23 +24,33 @@ import androidx.compose.ui.unit.sp
 
 @Preview
 @Composable
-fun CounterScreen(modifier: Modifier = Modifier){
+fun CounterComponent(modifier: Modifier = Modifier){
   val count = rememberSaveable{ mutableStateOf(0)}
+  Log.d("COUNT", "ALL of it")
   Column(modifier = modifier.fillMaxSize(),
   verticalArrangement = Arrangement.Center,
   horizontalAlignment = Alignment.CenterHorizontally) {
+    Log.d("COUNT", "Just the column")
 
-    Text(text = "Count is ${count.value}", style = TextStyle(
-      fontFamily = FontFamily.Monospace,
-      fontSize = 18.sp,
+    Box {
+      Log.d("COUNT", "Just the text")
+      Text(
+        text = "Count is ${count.value}", style = TextStyle(
+          fontFamily = FontFamily.Monospace,
+          fontSize = 18.sp,
 
-    ))
+          )
+      )
+    }
     Spacer(modifier = Modifier.height(24.dp))
-    Button(onClick = {
-      count.value += 1
-      Log.d("COUNT", "is ${count.value}")
-    }) {
-      Text(text = "Click Me!", modifier = modifier.padding(8.dp))
+    Box {
+      Log.d("COUNT", "Just the Button")
+      Button(onClick = {
+        count.value += 1
+        Log.d("COUNT", "is ${count.value}")
+      }) {
+        Text(text = "Click Me!", modifier = modifier.padding(8.dp))
+      }
     }
   }
 
