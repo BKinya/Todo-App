@@ -6,7 +6,7 @@ A Todo app: A sample app to use at Pwani workshops, May Edition: Building Androi
 ### Resources
 
 [Jetpack Compose Stability Explained](https://medium.com/androiddevelopers/jetpack-compose-stability-explained-79c10db270c8)
-
+[Jetpack Compose Debbuging](https://io.google/2023/program/a3ed5302-d787-41bd-8623-54193d36caf0/)
 
 Find Me 👇🏼
 

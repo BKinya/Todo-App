@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
 
 data class TodoItem(
   val itemId: Int = 0,
-  val name: String = "Complete Slides",
+  val name: String = "Complete the slides" ,
   val done: Boolean = false
 )
 
