@@ -1,7 +1,10 @@
 # Todo-App
 A Todo app: A sample app to use at Pwani workshops, May Edition: Building Android UI with Jetpack Compose
 
+## State
+State in an app is any value that can change, like whether to show a button or not, the result of fetching data from a data source, and much more. In this session, we'll learn about state and composition. We'll look at smart recomposition,   stable and unstable state and how state stability affects recomposition.  We'll also learn about at state hoisting and create stateful and stateless composable. 
 
+Happy Composing!
 
 ### Resources
 
