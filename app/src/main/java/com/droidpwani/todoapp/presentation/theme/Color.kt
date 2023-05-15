@@ -1,4 +1,4 @@
-package com.droidpwani.todoapp.ui.theme
+package com.droidpwani.todoapp.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

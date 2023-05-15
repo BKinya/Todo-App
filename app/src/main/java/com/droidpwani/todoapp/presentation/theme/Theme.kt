@@ -1,4 +1,4 @@
-package com.droidpwani.todoapp.ui.theme
+package com.droidpwani.todoapp.presentation.theme
 
 import android.app.Activity
 import android.os.Build
