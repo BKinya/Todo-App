@@ -7,7 +7,7 @@ State in an app is any value that can change, like whether to show a button or n
 Happy Composing!
 
 ### Resources
-
+- [Handling State in Compose | Slides](https://speakerdeck.com/bkinya/handling-state-in-jetpack-compose)
 - [Jetpack Compose Stability Explained](https://medium.com/androiddevelopers/jetpack-compose-stability-explained-79c10db270c8)
 - [Jetpack Compose Debbuging](https://io.google/2023/program/a3ed5302-d787-41bd-8623-54193d36caf0/)
 - [Managing State in Jetpack Compose](https://www.kodeco.com/30172122-managing-state-in-jetpack-compose)
