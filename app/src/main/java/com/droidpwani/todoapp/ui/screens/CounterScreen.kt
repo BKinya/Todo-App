@@ -17,26 +17,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@Preview
 @Composable
-fun CounterScreen(modifier: Modifier = Modifier){
-  var count = 0
-  Column(modifier = modifier.fillMaxSize(),
-  verticalArrangement = Arrangement.Center,
-  horizontalAlignment = Alignment.CenterHorizontally) {
+fun CounterScreen(modifier: Modifier = Modifier, count: Int, updateCount: () -> Unit) {
+  Column(
+    modifier = modifier.fillMaxSize(),
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally
+  ) {
 
-    Text(text = "Count is $count", style = TextStyle(
-      fontFamily = FontFamily.Monospace,
-      fontSize = 18.sp,
+    Text(
+      text = "Count is $count", style = TextStyle(
+        fontFamily = FontFamily.Monospace,
+        fontSize = 18.sp,
 
-    ))
+        )
+    )
     Spacer(modifier = Modifier.height(24.dp))
-    Button(onClick = {
-      count += 1
-    }) {
+    Button(onClick = updateCount) {
       Text(text = "Click Me!", modifier = modifier.padding(8.dp))
     }
-    
+
   }
 
 }
