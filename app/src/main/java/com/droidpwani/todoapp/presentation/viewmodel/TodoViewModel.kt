@@ -6,10 +6,12 @@ import com.droidpwani.todoapp.TAG
 import com.droidpwani.todoapp.domain.model.TodoItem
 import com.droidpwani.todoapp.domain.model.TodoResult
 import com.droidpwani.todoapp.domain.repository.TodoRepository
+import com.droidpwani.todoapp.presentation.actions.TodoUiAction
 import com.droidpwani.todoapp.presentation.uiState.AddItemUiState
 import com.droidpwani.todoapp.presentation.uiState.TodoUiState
 import com.droidpwani.todoapp.presentation.uiState.TodoUiState.Empty
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
@@ -29,7 +31,21 @@ class TodoViewModel(
     MutableStateFlow(AddItemUiState.Idle)
   val addItemUiState get() = _addItemUiState.asStateFlow()
 
+  val uiActions = MutableSharedFlow<TodoUiAction>(extraBufferCapacity = 10)
 
+  init {
+    handleActions()
+  }
+  fun handleActions(){
+    viewModelScope.launch {
+      uiActions.collect{ action ->
+        when(action){
+          is TodoUiAction.FetchTodoItems -> getTodoItems()
+          is TodoUiAction.SaveItem -> saveTodoItem(action.item)
+        }
+      }
+    }
+  }
   fun getTodoItems() {
     viewModelScope.launch {
       logcat("TODOiTEMSScreen"){"vm getting started"}

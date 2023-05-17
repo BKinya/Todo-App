@@ -6,13 +6,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.droidpwani.todoapp.presentation.actions.TodoUiAction
 import com.droidpwani.todoapp.presentation.component.EmptyComponent
 import com.droidpwani.todoapp.presentation.component.ErrorComponent
 import com.droidpwani.todoapp.presentation.component.TodoListComponent
 import com.droidpwani.todoapp.presentation.uiState.TodoUiState
 import com.droidpwani.todoapp.presentation.viewmodel.TodoViewModel
-import logcat.logcat
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun TodoItemsScreen(
@@ -23,7 +22,7 @@ fun TodoItemsScreen(
   Scaffold() { contentPadding ->
 
     LaunchedEffect(Unit ){
-      todoViewModel.getTodoItems()// TODO: Create events
+      todoViewModel.uiActions.tryEmit(TodoUiAction.FetchTodoItems)
     }
     val todoUiState by todoViewModel.todoUiState.collectAsStateWithLifecycle()
     when (todoUiState) {
