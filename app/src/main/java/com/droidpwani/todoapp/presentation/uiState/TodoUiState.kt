@@ -16,8 +16,6 @@ sealed interface TodoUiState {
 
 
 sealed interface AddItemUiState {
-  object Idle: AddItemUiState
-  object Loading : AddItemUiState
 
   @JvmInline
   value class Success(val message: String = "Successfully Added an item") : AddItemUiState

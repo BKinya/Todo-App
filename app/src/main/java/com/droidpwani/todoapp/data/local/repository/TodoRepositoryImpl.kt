@@ -29,7 +29,7 @@ class TodoRepositoryImpl(
       }
   }
 
-  override suspend fun saveTodoItem(item: TodoItem): Flow<Result<String>> = flow {
+  override suspend fun saveTodoItem(item: TodoItem): Result<String> {
   val result =  try {
       val result = todoItemDao.saveToDoItem(item.toEntity())
       if (result > 0) {
@@ -42,7 +42,7 @@ class TodoRepositoryImpl(
       logcat("TodoRepository") { "Something known went wrong ${e.message}" }
       Result.failure(exception = e)
     }
-    emit(result)
+    return result
   }
 
   override suspend fun saveTodoItems(items: List<TodoItem>) {

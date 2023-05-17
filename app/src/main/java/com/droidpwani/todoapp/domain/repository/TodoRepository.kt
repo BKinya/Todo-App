@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface TodoRepository {
   fun getTodoItems(): Flow<TodoResult>
 
-  suspend fun saveTodoItem(item: TodoItem): Flow<Result<String>>
+  suspend fun saveTodoItem(item: TodoItem): Result<String>
 
   suspend fun saveTodoItems(items: List<TodoItem>)
 

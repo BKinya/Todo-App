@@ -20,7 +20,6 @@ fun TodoItemsScreen(
   navigateToAddItemScreen: () -> Unit
 ) {
   Scaffold() { contentPadding ->
-
     LaunchedEffect(Unit ){
       todoViewModel.uiActions.tryEmit(TodoUiAction.FetchTodoItems)
     }

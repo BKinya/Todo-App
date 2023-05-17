@@ -14,10 +14,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -28,14 +27,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.droidpwani.todoapp.presentation.component.ErrorComponent
-import com.droidpwani.todoapp.presentation.component.ProgressIndicator
+import com.droidpwani.todoapp.presentation.actions.TodoUiAction
 import com.droidpwani.todoapp.presentation.uiState.AddItemUiState
 import com.droidpwani.todoapp.presentation.util.takeHalfParentWidthCentered
 import com.droidpwani.todoapp.presentation.viewmodel.TodoViewModel
-import logcat.logcat
+import kotlinx.coroutines.flow.consumeAsFlow
 import org.koin.androidx.compose.koinViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -47,7 +45,6 @@ fun AddItemScreen(
   navigateToTodoListScreen: () -> Unit = {}
 ) {
   var item by rememberSaveable { mutableStateOf("") }
-  val uiState = todoViewModel.addItemUiState.collectAsStateWithLifecycle().value
 
   Scaffold(
     topBar = {
@@ -63,13 +60,18 @@ fun AddItemScreen(
       })
     }
   ) { contentPadding ->
+    LaunchedEffect(Unit ){
+      todoViewModel.addItemUiState.consumeAsFlow().collectLatest { uiState ->
+        when(uiState){
+          is AddItemUiState.Success -> {
+            navigateToTodoListScreen()
+          }
+          is AddItemUiState.Error -> {}
+          else -> {}
+        }
+      }
+    }
 
-//    when(uiState){// fiXME: mighty remove
-//      is AddItemUiState.Success -> navigateToTodoListScreen()
-//      is AddItemUiState.Loading -> {}
-//      is AddItemUiState.Error -> {}
-//      else -> {}
-//    }
 
     Surface(modifier = modifier.padding(contentPadding)) {
       Column(
@@ -106,8 +108,7 @@ fun AddItemScreen(
         Button(modifier = modifier.takeHalfParentWidthCentered(),
           onClick = {
             if (item.isNotEmpty()) {
-              todoViewModel.saveTodoItem(item)
-              navigateToTodoListScreen()// TODO: lOOK AT LATER
+              todoViewModel.sendAction(TodoUiAction.SaveItem(item = item))
             }
           }) {
           Text(
@@ -118,7 +119,6 @@ fun AddItemScreen(
               color = Color.White
             )
           )
-
         }
       }
     }

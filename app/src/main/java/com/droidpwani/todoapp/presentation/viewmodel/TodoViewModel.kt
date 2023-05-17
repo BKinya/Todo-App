@@ -11,6 +11,7 @@ import com.droidpwani.todoapp.presentation.uiState.AddItemUiState
 import com.droidpwani.todoapp.presentation.uiState.TodoUiState
 import com.droidpwani.todoapp.presentation.uiState.TodoUiState.Empty
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,9 +28,7 @@ class TodoViewModel(
   private val _todoUiState: MutableStateFlow<TodoUiState> = MutableStateFlow(Empty())
   val todoUiState get() = _todoUiState.asStateFlow()
 
-  private val _addItemUiState: MutableStateFlow<AddItemUiState> =
-    MutableStateFlow(AddItemUiState.Idle)
-  val addItemUiState get() = _addItemUiState.asStateFlow()
+  val addItemUiState= Channel<AddItemUiState>(Channel.BUFFERED)
 
   val uiActions = MutableSharedFlow<TodoUiAction>(extraBufferCapacity = 10)
 
@@ -87,22 +86,22 @@ class TodoViewModel(
       val todoItem = TodoItem(
         task = item
       )
-      todoRepository.saveTodoItem(todoItem).onStart {
-        _addItemUiState.value = AddItemUiState.Loading
-      }.catch { exception ->
-        logcat("TodoViewModel") { "Something known went wrong ${exception.message}" }
-        _addItemUiState.value = AddItemUiState.Error("Something went Wrong")
-      }.collectLatest { result ->
-        if (result.isSuccess) {
-          _addItemUiState.value = AddItemUiState.Success()
+     val result = todoRepository.saveTodoItem(todoItem)
+      logcat("TODOvM"){"WEWWEW"}
+      if (result.isSuccess) {
+          addItemUiState.send(AddItemUiState.Success())
         } else {
           logcat("TodoViewModel") { "Something prolly unknown went wrong ${result.exceptionOrNull()?.message}" }
-          _addItemUiState.value =
-            AddItemUiState.Error(result.exceptionOrNull()?.message ?: "Something went wrong")
+          val message = result.exceptionOrNull()?.message ?: "Something went wrong"
+          addItemUiState.send(AddItemUiState.Error(message))
         }
 
       }
     }
+
+
+  fun sendAction(action: TodoUiAction){
+    uiActions.tryEmit(action)
   }
 
   override fun onCleared() {
