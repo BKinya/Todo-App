@@ -47,9 +47,6 @@ fun CounterScreen(modifier: Modifier = Modifier, count: Int, updateCount: () -> 
     Spacer(modifier = Modifier.height(36.dp))
     Divider(color = Color.LightGray, thickness = 1.dp)
     Spacer(modifier = Modifier.height(12.dp))
-    TodoScreen()
-
-
   }
 
 }
