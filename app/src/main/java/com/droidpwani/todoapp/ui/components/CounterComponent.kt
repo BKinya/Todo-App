@@ -21,6 +21,13 @@ import com.droidpwani.todoapp.LogCompositions
 import com.droidpwani.todoapp.TAG
 import com.droidpwani.todoapp.ui.screens.TodoScreen
 
+/**
+ * TODO
+ * If count is greater then 10 show Text below `click me!` button
+ *
+ */
+
+
 @Composable
 fun CounterScreen(modifier: Modifier = Modifier, count: Int, updateCount: () -> Unit) {
   LogCompositions(tag = TAG, msg = "CounterScreen")
@@ -44,9 +51,6 @@ fun CounterScreen(modifier: Modifier = Modifier, count: Int, updateCount: () -> 
       Text(text = "Click Me!", modifier = modifier.padding(8.dp))
     }
 
-    Spacer(modifier = Modifier.height(36.dp))
-    Divider(color = Color.LightGray, thickness = 1.dp)
-    Spacer(modifier = Modifier.height(12.dp))
   }
 
 }
