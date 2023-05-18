@@ -23,7 +23,8 @@ import com.droidpwani.todoapp.ui.screens.TodoScreen
 
 /**
  * TODO
- * If count is greater then 10 show Text below `click me!` button
+ * If count is greater then 10 show Text with Your
+ * Name or  greeting below `click me!` button
  *
  */
 
