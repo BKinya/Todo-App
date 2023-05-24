@@ -30,7 +30,11 @@ import com.droidpwani.todoapp.ui.screens.TodoScreen
 
 
 @Composable
-fun CounterScreen(modifier: Modifier = Modifier, count: Int, updateCount: () -> Unit) {
+fun CounterScreen(
+  modifier: Modifier = Modifier,
+  count: Int,
+  updateCount: () -> Unit
+) {
   LogCompositions(tag = TAG, msg = "CounterScreen")
   Column(
     modifier = modifier
@@ -39,19 +43,20 @@ fun CounterScreen(modifier: Modifier = Modifier, count: Int, updateCount: () -> 
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
-
     Text(
       text = "Count is $count", style = TextStyle(
         fontFamily = FontFamily.Monospace,
         fontSize = 18.sp,
-
         )
     )
     Spacer(modifier = Modifier.height(24.dp))
     Button(onClick = updateCount) {
       Text(text = "Click Me!", modifier = modifier.padding(8.dp))
     }
-
+    Spacer(modifier = Modifier.height(36.dp))
+    if (count > 7) {
+      Text(text = "Helloooo !")
+    }
   }
 
 }
