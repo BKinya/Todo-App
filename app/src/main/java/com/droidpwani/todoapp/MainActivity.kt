@@ -24,11 +24,6 @@ import logcat.logcat
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- * TODO App
- * Good to have ... A progress bar
- * Good to have ... Unit tests and others
- */
 const val TAG = "TODO_APP"
 class MainActivity : ComponentActivity() {
   private val todoViewModel: TodoViewModel by viewModel()
