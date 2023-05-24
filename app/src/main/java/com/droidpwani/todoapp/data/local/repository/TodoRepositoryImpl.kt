@@ -45,27 +45,30 @@ class TodoRepositoryImpl(
     return result
   }
 
-  override suspend fun saveTodoItems(items: List<TodoItem>) {
-    TODO("Not yet implemented")
-  }
 
   override suspend fun deleteTodoItem(item: TodoItem) {
-    TODO("Not yet implemented")
+    try {
+      val result = todoItemDao.removeTodoItem(item = item.toEntity())
+      if (result > 0) {
+        logcat("TodoRepository") { "Delete Successful" }
+      } else {
+        logcat("TodoRepository") { "[Delete]Something unknown went wrong" }
+      }
+    } catch (e: Exception) {
+      logcat("TodoRepository") { "[Delete]Something known went wrong ${e.message}" }
+    }
   }
 
-  override suspend fun updateTodoItem(item: TodoItem): Result<String> {
-    val result = try {
+  override suspend fun updateTodoItem(item: TodoItem) {
+    try {
       val result = todoItemDao.updateTodoItem(item.toEntity())
       if (result > 0) {
-        Result.success("Item successfully Updated")
+        logcat("TodoRepository") { "Update Successful" }
       } else {
         logcat("TodoRepository") { "[Update]Something unknown went wrong" }
-        Result.failure(exception = Exception("Something went wrong"))
       }
     } catch (exception: Exception) {
       logcat("TodoRepository") { "[Update]Something known went wrong ${exception.message}" }
-      Result.failure(exception = exception)
     }
-    return result
   }
 }

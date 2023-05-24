@@ -13,11 +13,8 @@ interface TodoItemDao {
   @Insert
   suspend fun saveToDoItem(item: TodoEntity): Long
 
-  @Insert
-  suspend fun saveItems(todoEntituses: List<TodoEntity>)
-
   @Delete
-  suspend fun removeTodoItem(item: TodoEntity)
+  suspend fun removeTodoItem(item: TodoEntity): Int
 
   @Update
   suspend fun updateTodoItem(item: TodoEntity): Int

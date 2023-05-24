@@ -42,6 +42,7 @@ class TodoViewModel(
           is TodoUiAction.FetchTodoItems -> getTodoItems()
           is TodoUiAction.SaveItem -> saveTodoItem(action.item)
           is TodoUiAction.UpdateItem -> updateAnItem(action.updatedItem)
+          is TodoUiAction.DeleteItem -> deleteAnItem(action.itemToDelete)
         }
       }
     }
@@ -104,17 +105,14 @@ class TodoViewModel(
   }
 
   fun updateAnItem(updatedItem: TodoItem) {
-    logcat("UUPdate"){"Vm here"}
     viewModelScope.launch {
-      logcat("UUPdate"){"Vm also"}
-      val result = todoRepository.updateTodoItem(updatedItem)
-      if (result.isSuccess) {
-        addUpdateItemUiState.send(AddUpdateItemUiState.Success())
-      } else {
-        logcat("TodoViewModel") { "[Update]Something probably unknown went wrong ${result.exceptionOrNull()?.message}" }
-        val message = result.exceptionOrNull()?.message ?: "Something went wrong"
-        addUpdateItemUiState.send(AddUpdateItemUiState.Error(message))
-      }
+      todoRepository.updateTodoItem(updatedItem)
+    }
+  }
+
+  fun deleteAnItem(itemToDelete: TodoItem){
+    viewModelScope.launch {
+      todoRepository.deleteTodoItem(itemToDelete)
     }
   }
 }

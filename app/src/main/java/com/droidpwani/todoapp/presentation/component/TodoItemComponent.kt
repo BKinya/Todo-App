@@ -33,7 +33,7 @@ fun TodoItemComponent(
   modifier: Modifier = Modifier,
   todoItem: TodoItem = TodoItem(id = 0, task = "Complete sample project", done = false),
   markItemAsDone: (TodoItem) -> Unit = {},
-  removeAnItem: () -> Unit = {}
+  removeAnItem: (TodoItem) -> Unit = {}
 
 ) {
   Card(
@@ -51,7 +51,6 @@ fun TodoItemComponent(
       Checkbox(
         checked = todoItem.done,
         onCheckedChange = {
-          logcat("UUPdate"){"Getting started"}
           markItemAsDone(todoItem)
         },
       )
@@ -69,9 +68,10 @@ fun TodoItemComponent(
         modifier = modifier.fillMaxWidth()
       ) {
         Icon(
-          modifier = modifier.align(Alignment.CenterEnd).clickable(
-            onClick = removeAnItem
-          ),
+          modifier = modifier.align(Alignment.CenterEnd).clickable{
+            removeAnItem(todoItem)
+          }
+          ,
           painter = painterResource(id = R.drawable.ic_clear), contentDescription = "Clear Icon",
           tint = Color.Gray
         )

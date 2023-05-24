@@ -49,9 +49,12 @@ fun TodoItemsScreen(
           todoItems = state.todoItems,
           markItemAsDone = {todoItem ->
             val updatedItem = todoItem.copy(done = !todoItem.done)
-            todoViewModel.updateAnItem(updatedItem = updatedItem)
+            todoViewModel.sendAction(TodoUiAction.UpdateItem(updatedItem))
           },
-          navigateToAddItemScreen = navigateToAddItemScreen
+          navigateToAddItemScreen = navigateToAddItemScreen,
+          removeItem = { itemToDelete ->
+            todoViewModel.sendAction(TodoUiAction.DeleteItem(itemToDelete))
+          }
         )
       }
     }

@@ -9,4 +9,7 @@ sealed interface TodoUiAction {
 
   @JvmInline
   value class UpdateItem(val updatedItem: TodoItem): TodoUiAction
+
+  @JvmInline
+  value class DeleteItem(val itemToDelete: TodoItem): TodoUiAction
 }

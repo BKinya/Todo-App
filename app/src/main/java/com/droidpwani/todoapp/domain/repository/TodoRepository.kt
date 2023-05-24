@@ -9,9 +9,7 @@ interface TodoRepository {
 
   suspend fun saveTodoItem(item: TodoItem): Result<String>
 
-  suspend fun saveTodoItems(items: List<TodoItem>)
-
   suspend fun deleteTodoItem(item: TodoItem)
 
-  suspend fun updateTodoItem(item: TodoItem): Result<String>
+  suspend fun updateTodoItem(item: TodoItem)
 }

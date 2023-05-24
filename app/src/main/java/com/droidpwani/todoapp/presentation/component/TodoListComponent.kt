@@ -35,6 +35,7 @@ fun TodoListComponent(
   modifier: Modifier = Modifier,
   todoItems: ImmutableList<TodoItem>,
   markItemAsDone: (TodoItem) -> Unit,
+  removeItem: (TodoItem) -> Unit,
   navigateToAddItemScreen: () -> Unit
 ) {
 
@@ -43,8 +44,7 @@ fun TodoListComponent(
       val completedItems = todoItems.count { item ->
         item.done
       }
-
-      val fractionCompleted = completedItems / (todoItems.size)
+      val fractionCompleted = completedItems.div(todoItems.size.toFloat())
       fractionCompleted
     }
   }
@@ -84,14 +84,15 @@ fun TodoListComponent(
           modifier = modifier
             .fillMaxWidth()
             .padding(16.dp),
-          progress = progress.toFloat()
+          progress = progress
         )
       }
       items(todoItems, key = { todoItem -> todoItem.id }) { item ->
         TodoItemComponent(
           modifier = modifier,
           todoItem = item,
-          markItemAsDone = markItemAsDone
+          markItemAsDone = markItemAsDone,
+          removeAnItem = removeItem
         )
       }
     }
