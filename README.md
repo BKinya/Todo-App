@@ -1,6 +1,12 @@
 # Todo-App
 A Todo app: A sample app to use at Pwani workshops, May Edition: Building Android UI with Jetpack Compose
 
+## Demo
+
+https://github.com/BKinya/Todo-App/assets/30239692/519bb338-2d9f-40ac-895f-3651aeaf97c8
+
+
+
 ## Session 01: Compose Layouts
 
 ### Compose Layouts
