@@ -55,6 +55,8 @@ In this project, I have used an MVI approach, sealed interfaces to create exhaus
 - [Navigating in Compose | Blog](https://medium.com/google-developer-experts/navigating-in-jetpack-compose-78c78d365c6a)
 
 Happy Composing! 🎉
+
+
 Find Me 👇🏼
 
 [Twitter](https://twitter.com/B__Kinya) || [LinkedIn](https://www.linkedin.com/in/beatrice-kinya-93307514b/) || [Hashnode](https://kinya.hashnode.dev)
