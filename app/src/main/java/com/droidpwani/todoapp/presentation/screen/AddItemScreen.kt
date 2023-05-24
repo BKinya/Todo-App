@@ -28,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.droidpwani.todoapp.presentation.actions.TodoUiAction
-import com.droidpwani.todoapp.presentation.uiState.AddItemUiState
+import com.droidpwani.todoapp.presentation.uiState.AddUpdateItemUiState
 import com.droidpwani.todoapp.presentation.util.takeHalfParentWidthCentered
 import com.droidpwani.todoapp.presentation.viewmodel.TodoViewModel
 import kotlinx.coroutines.flow.consumeAsFlow
@@ -61,12 +61,12 @@ fun AddItemScreen(
     }
   ) { contentPadding ->
     LaunchedEffect(Unit ){
-      todoViewModel.addItemUiState.consumeAsFlow().collectLatest { uiState ->
+      todoViewModel.addUpdateItemUiState.consumeAsFlow().collectLatest { uiState ->
         when(uiState){
-          is AddItemUiState.Success -> {
+          is AddUpdateItemUiState.Success -> {
             navigateToTodoListScreen()
           }
-          is AddItemUiState.Error -> {}
+          is AddUpdateItemUiState.Error -> {}
           else -> {}
         }
       }

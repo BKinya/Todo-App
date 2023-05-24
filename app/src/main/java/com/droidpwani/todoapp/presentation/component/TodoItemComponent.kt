@@ -1,5 +1,6 @@
 package com.droidpwani.todoapp.presentation.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,13 +24,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.droidpwani.todoapp.R
 import com.droidpwani.todoapp.domain.model.TodoItem
+import logcat.logcat
+import kotlin.math.log
 
 @Preview
 @Composable
 fun TodoItemComponent(
   modifier: Modifier = Modifier,
   todoItem: TodoItem = TodoItem(id = 0, task = "Complete sample project", done = false),
-  updateItem: (TodoItem) -> Unit = {}
+  markItemAsDone: (TodoItem) -> Unit = {},
+  removeAnItem: () -> Unit = {}
+
 ) {
   Card(
     modifier = modifier.padding(16.dp),
@@ -46,7 +51,8 @@ fun TodoItemComponent(
       Checkbox(
         checked = todoItem.done,
         onCheckedChange = {
-          updateItem(todoItem)
+          logcat("UUPdate"){"Getting started"}
+          markItemAsDone(todoItem)
         },
       )
 
@@ -63,7 +69,9 @@ fun TodoItemComponent(
         modifier = modifier.fillMaxWidth()
       ) {
         Icon(
-          modifier = modifier.align(Alignment.CenterEnd),
+          modifier = modifier.align(Alignment.CenterEnd).clickable(
+            onClick = removeAnItem
+          ),
           painter = painterResource(id = R.drawable.ic_clear), contentDescription = "Clear Icon",
           tint = Color.Gray
         )

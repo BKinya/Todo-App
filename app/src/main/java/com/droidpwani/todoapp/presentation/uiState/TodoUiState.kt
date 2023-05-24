@@ -15,11 +15,11 @@ sealed interface TodoUiState {
 }
 
 
-sealed interface AddItemUiState {
+sealed interface AddUpdateItemUiState {
 
   @JvmInline
-  value class Success(val message: String = "Successfully Added an item") : AddItemUiState
+  value class Success(val message: String = "Successfully Added an item") : AddUpdateItemUiState
 
   @JvmInline
-  value class Error(val errorMsg: String) :AddItemUiState
+  value class Error(val errorMsg: String) :AddUpdateItemUiState
 }

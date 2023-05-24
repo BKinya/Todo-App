@@ -15,10 +15,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -37,7 +34,7 @@ import kotlinx.collections.immutable.ImmutableList
 fun TodoListComponent(
   modifier: Modifier = Modifier,
   todoItems: ImmutableList<TodoItem>,
-  updateItem: (TodoItem) -> Unit,
+  markItemAsDone: (TodoItem) -> Unit,
   navigateToAddItemScreen: () -> Unit
 ) {
 
@@ -94,7 +91,7 @@ fun TodoListComponent(
         TodoItemComponent(
           modifier = modifier,
           todoItem = item,
-          updateItem = updateItem
+          markItemAsDone = markItemAsDone
         )
       }
     }

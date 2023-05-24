@@ -47,7 +47,10 @@ fun TodoItemsScreen(
         TodoListComponent(
           modifier = modifier,
           todoItems = state.todoItems,
-          updateItem = {},
+          markItemAsDone = {todoItem ->
+            val updatedItem = todoItem.copy(done = !todoItem.done)
+            todoViewModel.updateAnItem(updatedItem = updatedItem)
+          },
           navigateToAddItemScreen = navigateToAddItemScreen
         )
       }

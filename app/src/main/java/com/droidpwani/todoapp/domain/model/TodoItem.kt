@@ -9,7 +9,9 @@ data class TodoItem(
 )
 
 fun TodoItem.toEntity() = TodoEntity(
-  task = this.task
+  id = this.id,
+  task = this.task,
+  done = this.done
 )
 
 

@@ -30,7 +30,7 @@ class TodoRepositoryImpl(
   }
 
   override suspend fun saveTodoItem(item: TodoItem): Result<String> {
-  val result =  try {
+    val result = try {
       val result = todoItemDao.saveToDoItem(item.toEntity())
       if (result > 0) {
         Result.success("Item successfully saved")
@@ -53,7 +53,19 @@ class TodoRepositoryImpl(
     TODO("Not yet implemented")
   }
 
-  override suspend fun updateTodoItem(item: TodoItem) {
-    TODO("Not yet implemented")
+  override suspend fun updateTodoItem(item: TodoItem): Result<String> {
+    val result = try {
+      val result = todoItemDao.updateTodoItem(item.toEntity())
+      if (result > 0) {
+        Result.success("Item successfully Updated")
+      } else {
+        logcat("TodoRepository") { "[Update]Something unknown went wrong" }
+        Result.failure(exception = Exception("Something went wrong"))
+      }
+    } catch (exception: Exception) {
+      logcat("TodoRepository") { "[Update]Something known went wrong ${exception.message}" }
+      Result.failure(exception = exception)
+    }
+    return result
   }
 }

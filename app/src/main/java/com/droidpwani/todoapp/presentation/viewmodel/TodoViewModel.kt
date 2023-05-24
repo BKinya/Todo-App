@@ -2,12 +2,11 @@ package com.droidpwani.todoapp.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.droidpwani.todoapp.TAG
 import com.droidpwani.todoapp.domain.model.TodoItem
 import com.droidpwani.todoapp.domain.model.TodoResult
 import com.droidpwani.todoapp.domain.repository.TodoRepository
 import com.droidpwani.todoapp.presentation.actions.TodoUiAction
-import com.droidpwani.todoapp.presentation.uiState.AddItemUiState
+import com.droidpwani.todoapp.presentation.uiState.AddUpdateItemUiState
 import com.droidpwani.todoapp.presentation.uiState.TodoUiState
 import com.droidpwani.todoapp.presentation.uiState.TodoUiState.Empty
 import kotlinx.collections.immutable.toImmutableList
@@ -28,26 +27,28 @@ class TodoViewModel(
   private val _todoUiState: MutableStateFlow<TodoUiState> = MutableStateFlow(Empty())
   val todoUiState get() = _todoUiState.asStateFlow()
 
-  val addItemUiState= Channel<AddItemUiState>(Channel.BUFFERED)
+  val addUpdateItemUiState = Channel<AddUpdateItemUiState>(Channel.BUFFERED)
 
   val uiActions = MutableSharedFlow<TodoUiAction>(extraBufferCapacity = 10)
 
   init {
     handleActions()
   }
-  fun handleActions(){
+
+  fun handleActions() {
     viewModelScope.launch {
-      uiActions.collect{ action ->
-        when(action){
+      uiActions.collect { action ->
+        when (action) {
           is TodoUiAction.FetchTodoItems -> getTodoItems()
           is TodoUiAction.SaveItem -> saveTodoItem(action.item)
+          is TodoUiAction.UpdateItem -> updateAnItem(action.updatedItem)
         }
       }
     }
   }
+
   fun getTodoItems() {
     viewModelScope.launch {
-      logcat("TODOiTEMSScreen"){"vm getting started"}
       todoRepository.getTodoItems()
         .onStart {
           _todoUiState.value = TodoUiState.Loading
@@ -61,9 +62,9 @@ class TodoViewModel(
           when (result) {
             is TodoResult.Content -> {
               val items = result.todoItems.toImmutableList()
-              if (items.isEmpty()){
+              if (items.isEmpty()) {
                 _todoUiState.value = Empty()
-              }else{
+              } else {
                 _todoUiState.value = TodoUiState.Content(todoItems = items)
               }
             }
@@ -86,26 +87,34 @@ class TodoViewModel(
       val todoItem = TodoItem(
         task = item
       )
-     val result = todoRepository.saveTodoItem(todoItem)
-      logcat("TODOvM"){"WEWWEW"}
+      val result = todoRepository.saveTodoItem(todoItem)
       if (result.isSuccess) {
-          addItemUiState.send(AddItemUiState.Success())
-        } else {
-          logcat("TodoViewModel") { "Something prolly unknown went wrong ${result.exceptionOrNull()?.message}" }
-          val message = result.exceptionOrNull()?.message ?: "Something went wrong"
-          addItemUiState.send(AddItemUiState.Error(message))
-        }
-
+        addUpdateItemUiState.send(AddUpdateItemUiState.Success())
+      } else {
+        logcat("TodoViewModel") { "Something probably unknown went wrong ${result.exceptionOrNull()?.message}" }
+        val message = result.exceptionOrNull()?.message ?: "Something went wrong"
+        addUpdateItemUiState.send(AddUpdateItemUiState.Error(message))
       }
     }
+  }
 
 
-  fun sendAction(action: TodoUiAction){
+  fun sendAction(action: TodoUiAction) {
     uiActions.tryEmit(action)
   }
 
-  override fun onCleared() {
-    super.onCleared()
-    logcat(TAG) { "VM cleared" }
+  fun updateAnItem(updatedItem: TodoItem) {
+    logcat("UUPdate"){"Vm here"}
+    viewModelScope.launch {
+      logcat("UUPdate"){"Vm also"}
+      val result = todoRepository.updateTodoItem(updatedItem)
+      if (result.isSuccess) {
+        addUpdateItemUiState.send(AddUpdateItemUiState.Success())
+      } else {
+        logcat("TodoViewModel") { "[Update]Something probably unknown went wrong ${result.exceptionOrNull()?.message}" }
+        val message = result.exceptionOrNull()?.message ?: "Something went wrong"
+        addUpdateItemUiState.send(AddUpdateItemUiState.Error(message))
+      }
+    }
   }
 }

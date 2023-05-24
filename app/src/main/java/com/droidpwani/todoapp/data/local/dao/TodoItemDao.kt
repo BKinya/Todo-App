@@ -20,7 +20,7 @@ interface TodoItemDao {
   suspend fun removeTodoItem(item: TodoEntity)
 
   @Update
-  suspend fun updateTodoItem(item: TodoEntity)
+  suspend fun updateTodoItem(item: TodoEntity): Int
 
 
   @Query("SELECT * FROM todo_item")
