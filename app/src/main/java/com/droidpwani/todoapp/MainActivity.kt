@@ -31,7 +31,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 const val TAG = "TODO_APP"
 class MainActivity : ComponentActivity() {
-  val todoViewModel: TodoViewModel by viewModel()
+  private val todoViewModel: TodoViewModel by viewModel()
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
@@ -41,7 +41,6 @@ class MainActivity : ComponentActivity() {
           modifier = Modifier.fillMaxSize(),
           color = MaterialTheme.colorScheme.background
         ) {
-
          TodoNavHost(navController = navController, todoViewModel = todoViewModel)
         }
       }
@@ -49,26 +48,7 @@ class MainActivity : ComponentActivity() {
   }
 }
 
-
-data class TodoItem(
-  val itemId: Int = 0,
-  val name: String = "Complete the slides" ,
-  val done: Boolean = false
-)
-
-val todoItem = TodoItem(
-  itemId = 1,
-  name = "Complete Slides",
-  done = false
-)
-val todoItem2 = TodoItem(
-  itemId = 2,
-  name = "Go for a walk",
-  done = false
-)
 class Ref(var value: Int)
-
-
 @Composable
 inline fun LogCompositions(tag: String, msg: String) {
   val ref = remember { Ref(0) }
