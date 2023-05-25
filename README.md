@@ -34,6 +34,8 @@ State in an app is any value that can change, like whether to show a button or n
 - [Jetpack Compose Debbuging](https://io.google/2023/program/a3ed5302-d787-41bd-8623-54193d36caf0/)
 - [Managing State in Jetpack Compose](https://www.kodeco.com/30172122-managing-state-in-jetpack-compose)
 - [State in Jetpack Compose](https://www.youtube.com/watch?v=PMMY23F0CFg&list=PLWz5rJ2EKKc9Ty3Zl1hvMVUsXfkn93NRk&index=22)
+- [Jetpack Compose Effect Handlers](https://newsletter.jorgecastillo.dev/p/jetpack-compose-effect-handlers)
+- [Side Effects - Jetpack Compose | Docs](https://developer.android.com/jetpack/compose/side-effects)
 
 
 ## Session 03: Architecting Your Compose UI, A Deep Dive
@@ -57,9 +59,10 @@ In this project, I have used an MVI approach, sealed interfaces to create exhaus
 ## Session 04: Navigation in Jetpack Compose
 
 ### Resources
-- [Jetpack Navigation Components](https://developer.android.com/guide/navigation/navigation-getting-started)
+- [Jetpack Navigation Components | Docs](https://developer.android.com/guide/navigation/navigation-getting-started)
 - [Navigating With Compose | Docs](https://developer.android.com/jetpack/compose/navigation)
 - [Navigating in Compose | Blog](https://medium.com/google-developer-experts/navigating-in-jetpack-compose-78c78d365c6a)
+- [Navigating To a Destination](https://developer.android.com/guide/navigation/navigation-navigate)
 
 Happy Composing! 🎉
 
