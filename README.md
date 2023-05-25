@@ -57,6 +57,7 @@ In this project, I have used an MVI approach, sealed interfaces to create exhaus
 ## Session 04: Navigation in Jetpack Compose
 
 ### Resources
+- [Jetpack Navigation Components](https://developer.android.com/guide/navigation/navigation-getting-started)
 - [Navigating With Compose | Docs](https://developer.android.com/jetpack/compose/navigation)
 - [Navigating in Compose | Blog](https://medium.com/google-developer-experts/navigating-in-jetpack-compose-78c78d365c6a)
 
