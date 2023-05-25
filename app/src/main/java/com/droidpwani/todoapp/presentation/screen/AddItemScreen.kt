@@ -41,7 +41,6 @@ import kotlinx.coroutines.flow.collectLatest
 fun AddItemScreen(
   modifier: Modifier = Modifier,
   todoViewModel: TodoViewModel = koinViewModel(),
-  onSubmitClicked: (item: String) -> Unit = {},
   navigateToTodoListScreen: () -> Unit = {}
 ) {
   var item by rememberSaveable { mutableStateOf("") }
