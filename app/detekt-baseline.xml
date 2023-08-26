@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>FunctionNaming:AddItemScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Preview @Composable fun AddItemScreen( modifier: Modifier = Modifier, todoViewModel: TodoViewModel = koinViewModel(), navigateToTodoListScreen: () -&gt; Unit = {} )</ID>
+    <ID>FunctionNaming:EmptyComponent.kt$@Preview @Composable fun EmptyComponent( modifier: Modifier = Modifier, message: String = "Whoops! No Items found", navigateToAddItemScreen: () -&gt; Unit = {} )</ID>
+    <ID>FunctionNaming:ErrorComponent.kt$@Preview @Composable fun ErrorComponent( modifier: Modifier = Modifier, errorMsg: String = "Something Went Wrong", onRetryClicked: () -&gt; Unit = {} )</ID>
+    <ID>FunctionNaming:MainActivity.kt$@Composable inline fun LogCompositions(tag: String, msg: String)</ID>
+    <ID>FunctionNaming:ProgressIndicator.kt$@Preview @Composable fun ProgressIndicator()</ID>
+    <ID>FunctionNaming:Theme.kt$@Composable fun TodoAppTheme( darkTheme: Boolean = isSystemInDarkTheme(), // Dynamic color is available on Android 12+ dynamicColor: Boolean = true, content: @Composable () -&gt; Unit )</ID>
+    <ID>FunctionNaming:TodoItemComponent.kt$@Preview @Composable fun TodoItemComponent( modifier: Modifier = Modifier, todoItem: TodoItem = TodoItem(id = 0, task = "Complete sample project", done = false), markItemAsDone: (TodoItem) -&gt; Unit = {}, removeAnItem: (TodoItem) -&gt; Unit = {} )</ID>
+    <ID>FunctionNaming:TodoItemsScreen.kt$@Composable fun TodoItemsScreen( todoViewModel: TodoViewModel, navigateToAddItemScreen: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:TodoListComponent.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun TodoListComponent( todoItems: ImmutableList&lt;TodoItem&gt;, markItemAsDone: (TodoItem) -&gt; Unit, removeItem: (TodoItem) -&gt; Unit, navigateToAddItemScreen: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:TodoNavHost.kt$@Composable fun TodoNavHost( navController: NavHostController, todoViewModel: TodoViewModel, modifier: Modifier = Modifier )</ID>
+    <ID>LongMethod:AddItemScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Preview @Composable fun AddItemScreen( modifier: Modifier = Modifier, todoViewModel: TodoViewModel = koinViewModel(), navigateToTodoListScreen: () -&gt; Unit = {} )</ID>
+    <ID>LongMethod:TodoListComponent.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun TodoListComponent( todoItems: ImmutableList&lt;TodoItem&gt;, markItemAsDone: (TodoItem) -&gt; Unit, removeItem: (TodoItem) -&gt; Unit, navigateToAddItemScreen: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>MagicNumber:Color.kt$0xFF625b71</ID>
+    <ID>MagicNumber:Color.kt$0xFF6650a4</ID>
+    <ID>MagicNumber:Color.kt$0xFF7D5260</ID>
+    <ID>MagicNumber:Color.kt$0xFFCCC2DC</ID>
+    <ID>MagicNumber:Color.kt$0xFFD0BCFF</ID>
+    <ID>MagicNumber:Color.kt$0xFFEFB8C8</ID>
+    <ID>TooGenericExceptionCaught:TodoRepositoryImpl.kt$TodoRepositoryImpl$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:TodoRepositoryImpl.kt$TodoRepositoryImpl$exception: Exception</ID>
+  </CurrentIssues>
+</SmellBaseline>

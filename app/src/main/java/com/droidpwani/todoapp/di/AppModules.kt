@@ -10,14 +10,14 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModules = module {
-  single {
-    Room.databaseBuilder(
-      androidContext(),
-      TodoDatabase::class.java,
-      "todo-database"
-    ).build()
-  }
-  single { get<TodoDatabase>().todoItemDao() }
-  single<TodoRepository> { TodoRepositoryImpl(get()) }
-  viewModel { TodoViewModel(get()) }
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            TodoDatabase::class.java,
+            "todo-database"
+        ).build()
+    }
+    single { get<TodoDatabase>().todoItemDao() }
+    single<TodoRepository> { TodoRepositoryImpl(get()) }
+    viewModel { TodoViewModel(get()) }
 }

@@ -31,95 +31,97 @@ import com.droidpwani.todoapp.presentation.actions.TodoUiAction
 import com.droidpwani.todoapp.presentation.uiState.AddUpdateItemUiState
 import com.droidpwani.todoapp.presentation.util.takeHalfParentWidthCentered
 import com.droidpwani.todoapp.presentation.viewmodel.TodoViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.consumeAsFlow
 import org.koin.androidx.compose.koinViewModel
-import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun AddItemScreen(
-  modifier: Modifier = Modifier,
-  todoViewModel: TodoViewModel = koinViewModel(),
-  navigateToTodoListScreen: () -> Unit = {}
+    modifier: Modifier = Modifier,
+    todoViewModel: TodoViewModel = koinViewModel(),
+    navigateToTodoListScreen: () -> Unit = {}
 ) {
-  var item by rememberSaveable { mutableStateOf("") }
+    var item by rememberSaveable { mutableStateOf("") }
 
-  Scaffold(
-    topBar = {
-      TopAppBar(title = {
-        Text(
-          text = "Add an Item", style = TextStyle(
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 20.sp,
-            fontFamily = FontFamily.Monospace,
-            color = Color.DarkGray
-          )
-        )
-      })
-    }
-  ) { contentPadding ->
-    LaunchedEffect(Unit ){
-      todoViewModel.addUpdateItemUiState.consumeAsFlow().collectLatest { uiState ->
-        when(uiState){
-          is AddUpdateItemUiState.Success -> {
-            navigateToTodoListScreen()
-          }
-          is AddUpdateItemUiState.Error -> {}
-          else -> {}
+    Scaffold(
+        topBar = {
+            TopAppBar(title = {
+                Text(
+                    text = "Add an Item",
+                    style = TextStyle(
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 20.sp,
+                        fontFamily = FontFamily.Monospace,
+                        color = Color.DarkGray
+                    )
+                )
+            })
         }
-      }
-    }
-
-
-    Surface(modifier = modifier.padding(contentPadding)) {
-      Column(
-        modifier = modifier
-          .fillMaxWidth()
-          .fillMaxHeight()
-          .padding(24.dp),
-      ) {
-        Text(
-
-          text = "Todo Item",
-          style = TextStyle(
-            fontWeight = FontWeight.Normal,
-            fontSize = 17.sp,
-            fontFamily = FontFamily.Monospace,
-            color = Color.DarkGray
-          )
-        )
-        Spacer(modifier = modifier.height(12.dp))
-        OutlinedTextField(
-          modifier = modifier.fillMaxWidth(),
-          value = item,
-          onValueChange = { newValue ->
-            item = newValue
-          },
-          textStyle = TextStyle(
-            fontWeight = FontWeight.Normal,
-            fontSize = 17.sp,
-            fontFamily = FontFamily.Monospace,
-            color = Color.DarkGray
-          )
-        )
-        Spacer(modifier = modifier.height(27.dp))
-        Button(modifier = modifier.takeHalfParentWidthCentered(),
-          onClick = {
-            if (item.isNotEmpty()) {
-              todoViewModel.sendAction(TodoUiAction.SaveItem(item = item))
+    ) { contentPadding ->
+        LaunchedEffect(Unit) {
+            todoViewModel.addUpdateItemUiState.consumeAsFlow().collectLatest { uiState ->
+                when (uiState) {
+                    is AddUpdateItemUiState.Success -> {
+                        navigateToTodoListScreen()
+                    }
+                    is AddUpdateItemUiState.Error -> {}
+                    else -> {}
+                }
             }
-          }) {
-          Text(
-            text = "Save Item",
-            style = TextStyle(
-              fontFamily = FontFamily.Monospace,
-              fontSize = 16.sp,
-              color = Color.White
-            )
-          )
         }
-      }
+
+        Surface(modifier = modifier.padding(contentPadding)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(24.dp)
+            ) {
+                Text(
+
+                    text = "Todo Item",
+                    style = TextStyle(
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 17.sp,
+                        fontFamily = FontFamily.Monospace,
+                        color = Color.DarkGray
+                    )
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                OutlinedTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = item,
+                    onValueChange = { newValue ->
+                        item = newValue
+                    },
+                    textStyle = TextStyle(
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 17.sp,
+                        fontFamily = FontFamily.Monospace,
+                        color = Color.DarkGray
+                    )
+                )
+                Spacer(modifier = Modifier.height(27.dp))
+                Button(
+                    modifier = Modifier.takeHalfParentWidthCentered(),
+                    onClick = {
+                        if (item.isNotEmpty()) {
+                            todoViewModel.sendAction(TodoUiAction.SaveItem(item = item))
+                        }
+                    }
+                ) {
+                    Text(
+                        text = "Save Item",
+                        style = TextStyle(
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 16.sp,
+                            color = Color.White
+                        )
+                    )
+                }
+            }
+        }
     }
-  }
 }

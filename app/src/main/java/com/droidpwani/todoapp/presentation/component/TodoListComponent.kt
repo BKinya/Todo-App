@@ -32,70 +32,70 @@ import kotlinx.collections.immutable.ImmutableList
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TodoListComponent(
-  modifier: Modifier = Modifier,
-  todoItems: ImmutableList<TodoItem>,
-  markItemAsDone: (TodoItem) -> Unit,
-  removeItem: (TodoItem) -> Unit,
-  navigateToAddItemScreen: () -> Unit
+    todoItems: ImmutableList<TodoItem>,
+    markItemAsDone: (TodoItem) -> Unit,
+    removeItem: (TodoItem) -> Unit,
+    navigateToAddItemScreen: () -> Unit,
+    modifier: Modifier = Modifier
+
 ) {
-
-  val progress by remember(todoItems) {
-    derivedStateOf {
-      val completedItems = todoItems.count { item ->
-        item.done
-      }
-      val fractionCompleted = completedItems.div(todoItems.size.toFloat())
-      fractionCompleted
+    val progress by remember(todoItems) {
+        derivedStateOf {
+            val completedItems = todoItems.count { item ->
+                item.done
+            }
+            val fractionCompleted = completedItems.div(todoItems.size.toFloat())
+            fractionCompleted
+        }
     }
-  }
-  Scaffold(
-    topBar = {
-      TopAppBar(title = {
-        Text(
-          text = "My Todo List", style = TextStyle(
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 20.sp,
-            fontFamily = FontFamily.Monospace,
-            color = Color.DarkGray
-          )
-        )
-      })
-    },
-    floatingActionButton = {
-      FloatingActionButton(
-        modifier = modifier
-          .shadow(elevation = 4.dp, clip = true, shape = CircleShape),
-        onClick = navigateToAddItemScreen
-      ) {
-        Icon(
-          painter = painterResource(id = R.drawable.ic_add),
-          contentDescription = null,
-          tint = Color.Gray
-        )
-      }
+    Scaffold(
+        topBar = {
+            TopAppBar(title = {
+                Text(
+                    text = "My Todo List",
+                    style = TextStyle(
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 20.sp,
+                        fontFamily = FontFamily.Monospace,
+                        color = Color.DarkGray
+                    )
+                )
+            })
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                modifier = modifier
+                    .shadow(elevation = 4.dp, clip = true, shape = CircleShape),
+                onClick = navigateToAddItemScreen
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_add),
+                    contentDescription = null,
+                    tint = Color.Gray
+                )
+            }
+        }
+    ) { contentPadding ->
+        LazyColumn(
+            contentPadding = contentPadding,
+            modifier = modifier.fillMaxWidth()
+        ) {
+            item {
+                LinearProgressIndicator(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    progress = progress
+                )
+            }
+            items(todoItems, key = { todoItem -> todoItem.id }) { item ->
+                TodoItemComponent(
+                    modifier = Modifier,
+                    todoItem = item,
+                    markItemAsDone = markItemAsDone,
+                    removeAnItem = removeItem
+                )
+            }
+        }
     }
-  ) { contentPadding ->
-    LazyColumn(
-      contentPadding = contentPadding,
-      modifier = modifier.fillMaxWidth()
-    ) {
-      item {
-        LinearProgressIndicator(
-          modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-          progress = progress
-        )
-      }
-      items(todoItems, key = { todoItem -> todoItem.id }) { item ->
-        TodoItemComponent(
-          modifier = modifier,
-          todoItem = item,
-          markItemAsDone = markItemAsDone,
-          removeAnItem = removeItem
-        )
-      }
-    }
-  }
-
 }

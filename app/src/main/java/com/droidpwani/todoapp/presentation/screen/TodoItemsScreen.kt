@@ -15,48 +15,48 @@ import com.droidpwani.todoapp.presentation.viewmodel.TodoViewModel
 
 @Composable
 fun TodoItemsScreen(
-  modifier: Modifier = Modifier,
-  todoViewModel: TodoViewModel,
-  navigateToAddItemScreen: () -> Unit
+    todoViewModel: TodoViewModel,
+    navigateToAddItemScreen: () -> Unit,
+    modifier: Modifier = Modifier
+
 ) {
-  Scaffold { contentPadding ->
-    LaunchedEffect(Unit ){
-      todoViewModel.uiActions.tryEmit(TodoUiAction.FetchTodoItems)
+    Scaffold { _ ->
+        LaunchedEffect(Unit) {
+            todoViewModel.uiActions.tryEmit(TodoUiAction.FetchTodoItems)
+        }
+        val todoUiState by todoViewModel.todoUiState.collectAsStateWithLifecycle()
+        when (todoUiState) {
+            is TodoUiState.Empty -> {
+                EmptyComponent(
+                    modifier = modifier,
+                    navigateToAddItemScreen = navigateToAddItemScreen
+                )
+            }
+
+            is TodoUiState.Error -> {
+                ErrorComponent(
+                    modifier = modifier
+                )
+            }
+
+            is TodoUiState.Loading -> {
+            }
+
+            is TodoUiState.Content -> {
+                val state = todoUiState as TodoUiState.Content
+                TodoListComponent(
+                    modifier = modifier,
+                    todoItems = state.todoItems,
+                    markItemAsDone = { todoItem ->
+                        val updatedItem = todoItem.copy(done = !todoItem.done)
+                        todoViewModel.sendAction(TodoUiAction.UpdateItem(updatedItem))
+                    },
+                    navigateToAddItemScreen = navigateToAddItemScreen,
+                    removeItem = { itemToDelete ->
+                        todoViewModel.sendAction(TodoUiAction.DeleteItem(itemToDelete))
+                    }
+                )
+            }
+        }
     }
-    val todoUiState by todoViewModel.todoUiState.collectAsStateWithLifecycle()
-    when (todoUiState) {
-      is TodoUiState.Empty -> {
-        EmptyComponent(
-          modifier = modifier,
-          navigateToAddItemScreen = navigateToAddItemScreen
-        )
-      }
-
-      is TodoUiState.Error -> {
-        ErrorComponent(
-          modifier = modifier
-        )
-      }
-
-      is TodoUiState.Loading -> {
-
-      }
-
-      is TodoUiState.Content -> {
-        val state = todoUiState as TodoUiState.Content
-        TodoListComponent(
-          modifier = modifier,
-          todoItems = state.todoItems,
-          markItemAsDone = {todoItem ->
-            val updatedItem = todoItem.copy(done = !todoItem.done)
-            todoViewModel.sendAction(TodoUiAction.UpdateItem(updatedItem))
-          },
-          navigateToAddItemScreen = navigateToAddItemScreen,
-          removeItem = { itemToDelete ->
-            todoViewModel.sendAction(TodoUiAction.DeleteItem(itemToDelete))
-          }
-        )
-      }
-    }
-  }
 }

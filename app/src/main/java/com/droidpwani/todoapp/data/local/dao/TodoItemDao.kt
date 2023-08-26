@@ -10,16 +10,15 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TodoItemDao {
-  @Insert
-  fun saveToDoItem(item: TodoEntity): Long
+    @Insert
+    fun saveToDoItem(item: TodoEntity): Long
 
-  @Delete
-  fun removeTodoItem(item: TodoEntity): Int
+    @Delete
+    fun removeTodoItem(item: TodoEntity): Int
 
-  @Update
-  fun updateTodoItem(item: TodoEntity): Int
+    @Update
+    fun updateTodoItem(item: TodoEntity): Int
 
-
-  @Query("SELECT * FROM todo_item")
-  fun getAllTodoItems(): Flow<List<TodoEntity>>
+    @Query("SELECT * FROM todo_item")
+    fun getAllTodoItems(): Flow<List<TodoEntity>>
 }

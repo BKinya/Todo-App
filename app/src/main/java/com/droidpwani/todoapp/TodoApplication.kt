@@ -8,19 +8,18 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
-class TodoApplication: Application() {
+class TodoApplication : Application() {
 
-  override fun onCreate() {
-    super.onCreate()
-    // logcat
-    AndroidLogcatLogger.installOnDebuggableApp(this, minPriority = LogPriority.VERBOSE)
+    override fun onCreate() {
+        super.onCreate()
+        // logcat
+        AndroidLogcatLogger.installOnDebuggableApp(this, minPriority = LogPriority.VERBOSE)
 
-    // koin
-    startKoin {
-      androidLogger()
-      androidContext(this@TodoApplication)
-      modules(appModules)
-
+        // koin
+        startKoin {
+            androidLogger()
+            androidContext(this@TodoApplication)
+            modules(appModules)
+        }
     }
-  }
 }

@@ -11,22 +11,25 @@ import com.droidpwani.todoapp.presentation.viewmodel.TodoViewModel
 
 @Composable
 fun TodoNavHost(
-  modifier: Modifier = Modifier,
-  navController: NavHostController,
-  todoViewModel: TodoViewModel
-) {
-  NavHost(navController = navController, startDestination = TodoAppScreens.TodoList.route) {
-    composable(TodoAppScreens.TodoList.route) {
-      TodoItemsScreen(
-        modifier = modifier,
-        todoViewModel = todoViewModel,
-        navigateToAddItemScreen = { navController.navigate(TodoAppScreens.AddItem.route) }
-      )
-    }
+    navController: NavHostController,
+    todoViewModel: TodoViewModel,
+    modifier: Modifier = Modifier
 
-    composable(TodoAppScreens.AddItem.route) {
-      AddItemScreen(modifier = modifier,
-        navigateToTodoListScreen = { navController.navigate(TodoAppScreens.TodoList.route) })
+) {
+    NavHost(navController = navController, startDestination = TodoAppScreens.TodoList.route) {
+        composable(TodoAppScreens.TodoList.route) {
+            TodoItemsScreen(
+                modifier = modifier,
+                todoViewModel = todoViewModel,
+                navigateToAddItemScreen = { navController.navigate(TodoAppScreens.AddItem.route) }
+            )
+        }
+
+        composable(TodoAppScreens.AddItem.route) {
+            AddItemScreen(
+                modifier = modifier,
+                navigateToTodoListScreen = { navController.navigate(TodoAppScreens.TodoList.route) }
+            )
+        }
     }
-  }
 }

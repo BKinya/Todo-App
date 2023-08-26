@@ -67,7 +67,8 @@ dependencies {
   debugImplementation 'androidx.compose.ui:ui-tooling'
   debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
-  // K
+  // Twitter Compose Rules
+  detektPlugins "com.twitter.compose.rules:detekt:0.0.26"
 
   // ROOM
   def room_version = "2.5.2"

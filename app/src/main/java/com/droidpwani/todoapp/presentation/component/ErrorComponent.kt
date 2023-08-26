@@ -20,33 +20,35 @@ import androidx.compose.ui.unit.sp
 @Preview
 @Composable
 fun ErrorComponent(
-  modifier: Modifier = Modifier,
-  errorMsg: String = "Something Went Wrong",
-  onRetryClicked: () -> Unit = {}
+    modifier: Modifier = Modifier,
+    errorMsg: String = "Something Went Wrong",
+    onRetryClicked: () -> Unit = {}
 ) {
-  Column(
-    modifier = modifier.fillMaxSize(),
-    verticalArrangement = Arrangement.Center,
-    horizontalAlignment = Alignment.CenterHorizontally
-  ) {
-    Text(
-      text = errorMsg, style = TextStyle(
-        fontFamily = FontFamily.Monospace,
-        fontSize = 18.sp,
-        color = Color.DarkGray
-      )
-    )
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = errorMsg,
+            style = TextStyle(
+                fontFamily = FontFamily.Monospace,
+                fontSize = 18.sp,
+                color = Color.DarkGray
+            )
+        )
 
-    Spacer(modifier = modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
-    Button(onClick = onRetryClicked) {
-      Text(text = "Retry",
-        style = TextStyle(
-          fontFamily = FontFamily.Monospace,
-          fontSize = 16.sp,
-          color = Color.White
-        ))
+        Button(onClick = onRetryClicked) {
+            Text(
+                text = "Retry",
+                style = TextStyle(
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 16.sp,
+                    color = Color.White
+                )
+            )
+        }
     }
-
-  }
 }

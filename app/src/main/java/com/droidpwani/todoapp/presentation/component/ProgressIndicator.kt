@@ -7,8 +7,8 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun ProgressIndicator(){
-  LinearProgressIndicator(
-    color = Color.LightGray
-  )
+fun ProgressIndicator() {
+    LinearProgressIndicator(
+        color = Color.LightGray
+    )
 }
